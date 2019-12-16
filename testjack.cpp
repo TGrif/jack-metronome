@@ -1,35 +1,22 @@
-
-// g++ testjack.cpp -o testjack `pkg-config jack gtkmm-2.4 --cflags --libs`
-
-#include <jack/jack.h>
-#include <jack/midiport.h>
-
 #include "testjack.hpp"
 
-#include "helpers.cpp"
 #include "ui.cpp"
 
 
-// jack_port_t* inputPort = 0;
-jack_port_t* outputPort_left = 0;
-jack_port_t* outputPort_right = 0;
-jack_port_t* inputMidiPort = 0;
-
-const int sampleRate = 44100;
 int size = sampleRate * 1;
 
 
-int process_callback(jack_nframes_t nframes, void*) {
+int process_callback (jack_nframes_t nframes, void*) {
 
   jack_midi_event_t in_event;
   
   // float* inputBuffer = (float*)jack_port_get_buffer(inputPort, nframes);
-  float* outputBuffer_left = (float*)jack_port_get_buffer(outputPort_left, nframes);
-  float* outputBuffer_right = (float*)jack_port_get_buffer(outputPort_right, nframes);
+  float* outputBuffer_left = (float*)jack_port_get_buffer(AUDIO_out_left, nframes);
+  float* outputBuffer_right = (float*)jack_port_get_buffer(AUDIO_out_right, nframes);
   
-  void* midi_port_buf = jack_port_get_buffer(inputMidiPort, nframes);
+  void* midi_port_buf = jack_port_get_buffer(MIDI_in, nframes);
   
-  /*
+  
   float sample[size];
   
   int frequency = 1800; // <-- frequency of the wave generated
@@ -52,13 +39,14 @@ int process_callback(jack_nframes_t nframes, void*) {
     outputBuffer_left[i] = sample[i];
     outputBuffer_right[i] = sample[i];
   }
-  */
   
-  for (int i = 0; i < (int) nframes; i++) {
-    jack_midi_event_get(&in_event, midi_port_buf, i);
-    if (in_event.buffer[0])
-      std::cout << "Msg. " << in_event.buffer[0] << std::endl;
-  }
+  
+  
+  // for (int i = 0; i < (int) nframes; i++) {
+  //   jack_midi_event_get(&in_event, midi_port_buf, i);
+  //   if (in_event.buffer[0])
+  //     std::cout << "Msg. " << in_event.buffer[0] << std::endl;
+  // }
   
   return 0;
 }
@@ -81,7 +69,7 @@ void generate_sine() {
 // }
 
 
-int main(int argc, char *argv[]) {
+int main (int argc, char *argv[]) {
   
   parseArguments(argc, argv);
   
@@ -89,7 +77,7 @@ int main(int argc, char *argv[]) {
   
   
   // create a JACK client and activate
-  jack_client_t* client = jack_client_open("JackClientTest", JackNullOption, 0, 0);
+  /*jack_client_t* */client = jack_client_open("JackClientTest", JackNullOption, 0, 0);
   
   // register the process callback : JACK "calls us back" when there is
   // work to be done, and the "process" function does that work.
@@ -98,15 +86,15 @@ int main(int argc, char *argv[]) {
   
   // register two ports, one input one output, both of AUDIO type
   // inputPort = jack_port_register(client, "input", JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput, 0);
-  outputPort_left = jack_port_register(client, "output", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
-  outputPort_right = jack_port_register(client, "output2", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
+  AUDIO_out_left = jack_port_register(client, "output", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
+  AUDIO_out_right = jack_port_register(client, "output2", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
 
-  if ((outputPort_left == NULL) || (outputPort_right == NULL)) {
+  if ((AUDIO_out_left == NULL) || (AUDIO_out_right == NULL)) {
     fprintf(stderr, "no more JACK ports available\n");
     exit(1);
   }
   
-  inputMidiPort = jack_port_register (client, "midi_in", JACK_DEFAULT_MIDI_TYPE, JackPortIsInput, 0);
+  MIDI_in = jack_port_register (client, "midi_in", JACK_DEFAULT_MIDI_TYPE, JackPortIsInput, 0);
   
   // activate the client, ie: enable it for processing
   jack_activate(client);
@@ -122,6 +110,7 @@ int main(int argc, char *argv[]) {
   std::cout << "Jack closed." << std::endl;
   
   return 0;
+  
 }
 
 // https://medium.com/@audiowaves/lets-write-a-simple-sine-wave-generator-with-c-and-juce-c8ab42d1f54f
