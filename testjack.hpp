@@ -3,8 +3,6 @@
 #include <jack/jack.h>
 #include <jack/midiport.h>
 
-#include <gtkmm.h>
-
 #include "helpers.cpp"
 
 
@@ -18,3 +16,4 @@ jack_port_t* MIDI_out;
 
 
 const int sampleRate = 44100;
+// int samplerate = jack_get_sample_rate( client );

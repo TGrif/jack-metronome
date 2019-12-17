@@ -1,9 +1,14 @@
+
 #include "testjack.hpp"
 
+#include "ui.cpp"
 
-void process_callback (jack_nframes_t nframes, void*) {
+
+int process_callback (jack_nframes_t nframes, void*) {
   
   void* midi_port_buf = jack_port_get_buffer(MIDI_out, nframes);
+  
+  return 0;
   
 }
 
@@ -25,12 +30,20 @@ void jack_shutdown (void *arg) {  // FIXME
 int main (int argc, char *argv[]) {
   
   client = jack_client_open("MetronomeJackClientTest", JackNullOption, 0, 0);
-  jack_set_process_callback(client, process_callback, 0);
   MIDI_out = jack_port_register(client, "output", JACK_DEFAULT_MIDI_TYPE, JackPortIsOutput, 0);
+  jack_set_process_callback(client, process_callback, 0);
   jack_activate(client);
   jack_on_shutdown(client, jack_shutdown, 0);
   
-  loop();
+  // loop();
+  
+  buildUI(argc, argv);
+  
+  // Gtk::Main kit(argc, argv);
+  // 
+  // MainWindow window;
+  // //Shows the window and returns when it is closed.
+  // Gtk::Main::run(window);
   
   
   jack_deactivate(client);

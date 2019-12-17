@@ -117,3 +117,5 @@ int main (int argc, char *argv[]) {
 // https://stackoverflow.com/questions/29748082/c-jackaudio-cant-get-stereo-sound
 // https://github.com/harryhaaren/openAudioProgrammingTutorials
 // https://github.com/harryhaaren/JACK-MIDI-Examples/
+
+// https://digitalleaves.com/blog/2017/12/build-cross-platform-c-project-autotools/
