@@ -1,6 +1,6 @@
-#include "testjack.hpp"
+#include "testjack.hh"
 
-#include "ui.cpp"
+#include "ui.cc"
 
 
 int size = sampleRate * 1;

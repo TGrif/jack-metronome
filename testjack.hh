@@ -3,7 +3,7 @@
 #include <jack/jack.h>
 #include <jack/midiport.h>
 
-#include "helpers.cpp"
+#include "helpers.cc"
 
 
 jack_client_t* client;
