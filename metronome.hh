@@ -1,9 +1,13 @@
 #include <iostream>
+#include <vector>
 
 #include <jack/jack.h>
 #include <jack/midiport.h>
 
+#include <sndfile.hh>
+
 #include "helpers.cc"
+
 
 
 jack_client_t* client;
