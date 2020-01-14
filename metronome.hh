@@ -2,6 +2,7 @@
 #define METRONOME_H
 
 #include <iostream>
+#include <atomic>
 #include <vector>
 
 #include <jack/jack.h>
@@ -15,13 +16,22 @@ jack_client_t* client;
 jack_port_t* AUDIO_out_left;
 jack_port_t* AUDIO_out_right;
 
-jack_port_t* MIDI_in;
-jack_port_t* MIDI_out;
+
+int sampleRate;
 
 std::vector<float> sampleVector;
-// std::vector<float> sampleVector2;
+std::vector<float> sampleVector2;
+
+float sample;
 
 int playbackIndex = 0;
 // int playbackIndex2 = 0;
+
+int BPM = 80;
+
+std::atomic<double> dt;  // tempo ?
+unsigned int cur_time = 0;
+double next_click;
+int counter = 0;
 
 #endif // METRONOME_H
