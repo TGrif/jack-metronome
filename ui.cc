@@ -5,6 +5,7 @@ void buildUI (int argc, char *argv[]) {
   Gtk::Main kit(argc, argv);
   MainWindow window;
   Gtk::Main::run(window);
+  std::cout << "ui" << std::endl;
 }
 
 
