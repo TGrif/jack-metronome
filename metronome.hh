@@ -10,6 +10,8 @@
 
 #include <sndfile.hh>
 
+// #include <gtkmm.h>
+
 
 jack_client_t* client;
 
@@ -25,7 +27,6 @@ std::vector<float> sampleVector2;
 float sample;
 
 int playbackIndex = 0;
-// int playbackIndex2 = 0;
 
 int BPM = 80;
 

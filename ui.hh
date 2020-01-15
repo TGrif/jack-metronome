@@ -14,23 +14,24 @@ class MainWindow: public Gtk::Window {
 
   protected:
 
-    // void fill_buffers();
-    
-    //Signal handlers:
+    void on_BPM_value_changed();
     void on_button_quit();
-    // void on_button_buffer1();
-    // void on_button_buffer2();
 
-    //Child widgets:
-    Gtk::VBox m_VBox;
 
-    Gtk::ScrolledWindow m_ScrolledWindow;
-    // Gtk::TextView m_TextView;
+    Glib::RefPtr<Gtk::Adjustment> bpm_adjustment;
+
+
+    Gtk::ScrolledWindow app_Window;
     
-    // Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer1, m_refTextBuffer2;
+    Gtk::VBox m_VBox;
+    Gtk::Box m_HBox_Digits;
+    
+    // Gtk::TextView m_TextView;
 
+    Gtk::HScale bpm_Scale;
+    
     Gtk::HButtonBox m_ButtonBox;
-    Gtk::Button m_Button_Quit;//, m_Button_Buffer1, m_Button_Buffer2;
+    Gtk::Button button_Quit;
   
 };
 

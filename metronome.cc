@@ -62,8 +62,8 @@ int loadTickSound() {
   int sizeTick = fileHandleTick.frames();
   int sizeTack = fileHandleTack.frames();
 
-  std::cout << sizeTick << std::endl;  // 23886
-  std::cout << sizeTack << std::endl;  // 5389
+  // std::cout << sizeTick << std::endl;  // 23886
+  // std::cout << sizeTack << std::endl;  // 5389
   
   if (sizeTick == 0 || sizeTack == 0) {
     std::cout << "Problem when loading metronome sound." << std::endl;
@@ -90,6 +90,7 @@ int loadTickSound() {
 
 void jack_shutdown (void *arg) {  // FIXME
   std::cout << "Jack jack_shutdown." << std::endl;
+  exit(1);
 }
 
 

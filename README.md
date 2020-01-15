@@ -7,7 +7,7 @@ libsndfile-devel
 
 
 ### compile
-g++ metronome.cc -o build/metronome `pkg-config jack sndfile gtkmm-2.4 --cflags --libs`
+g++ metronome.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --libs`
 
 
 
