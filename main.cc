@@ -4,11 +4,19 @@
  * License GPL3
  *
  */
- // #include "ui.cc"
- #include "metronome.cc"
- 
- int main(int argc, char *argv[]) {
-   // Gtk::Main kit(argc, argv);
-   // MainWindow window;
-   // Gtk::Main::run(window);
- }
+#include <iostream>
+
+#include <gtkmm.h>
+
+#include "metronome.cc"
+#include "ui.cc"
+
+
+int main(int argc, char *argv[]) {
+  
+  auto app = Gtk::Application::create(argc, argv, "org.of_pop.jack_metronome");
+  
+  MainWindow window(app);
+  return app->run(window);
+  
+}

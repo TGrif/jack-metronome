@@ -1,12 +1,16 @@
+#include "jackengine.hh"
 #include "metronome.hh"
-
-#include "ui.cc"
 
 
 // typedef jack_default_audio_sample_t sample_t;
 
 
-int process_callback (jack_nframes_t nframes, void*) {
+int Metronome::staticProcess(jack_nframes_t nframes, void *arg)
+{
+  return static_cast<Metronome*>(arg)->process(nframes);
+}
+
+int Metronome::process(jack_nframes_t nframes) {
   
   float* outputBuffer_left = (float*) jack_port_get_buffer(AUDIO_out_left, nframes);
   float* outputBuffer_right = (float*) jack_port_get_buffer(AUDIO_out_right, nframes);
@@ -54,7 +58,7 @@ int process_callback (jack_nframes_t nframes, void*) {
   
 }
 
-int loadTickSound() {
+int Metronome::loadTickSound() {
   SndfileHandle fileHandleTick("assets/metro_1.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
   SndfileHandle fileHandleTack("assets/metro_2.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
   
@@ -88,20 +92,22 @@ int loadTickSound() {
 }
 
 
-void jack_shutdown (void *arg) {  // FIXME
+void Metronome::jack_shutdown (void *arg) {  // FIXME
+  // jack_deactivate(client);
+  // jack_client_close(client);
   std::cout << "Jack jack_shutdown." << std::endl;
   exit(1);
 }
 
-
-int main (int argc, char *argv[]) {
+Metronome::Metronome() {
 
   // jack_client_free(client);
   
   client = jack_client_open("Jack Metronome", JackNullOption, 0, 0);
   // std::cout << jack_get_client_name(client) << std::endl;
   
-  jack_set_process_callback(client, process_callback, 0);
+  jack_set_process_callback(client, staticProcess, static_cast<void*>(this));
+  // jack_set_process_callback(client, process_callback, 0);
   jack_activate(client);
   
   jack_on_shutdown(client, jack_shutdown, 0);
@@ -115,7 +121,8 @@ int main (int argc, char *argv[]) {
   
   if (loadTickSound()) {
     std::cout << "Problem when loading metronome sound." << std::endl;
-    return 0;
+    // return 0;
+    return;
   }
   
   
@@ -126,9 +133,8 @@ int main (int argc, char *argv[]) {
   // std::cout << jack_time_start << std::endl;
   
   
-  buildUI(argc, argv);
-  
-  
+  // std::cout << "ui" << std::endl;
+  /*
   while (true) {
     sleep(1);
   }
@@ -136,7 +142,11 @@ int main (int argc, char *argv[]) {
   jack_deactivate(client);
   jack_client_close(client);
   
-  std::cout << "Jack closed." << std::endl;
-  return 0;
+  std::cout << "Jack closed." << std::endl;*/
+  // return 0;
   
+}
+
+Metronome::~Metronome() {
+  // noop
 }
