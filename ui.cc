@@ -1,13 +1,13 @@
 #include "ui.hh"
+#include "tempo.hh"
 
-
-MainWindow::MainWindow(const Glib::RefPtr<Gtk::Application>& app):
- bpm_adjustment(Gtk::Adjustment::create(80, 0, 100, 1, 100, 0)),
+MainWindow::MainWindow (const Glib::RefPtr<Gtk::Application>& app):
+ bpm_adjustment(Gtk::Adjustment::create(BPM, BPM_min, BPM_max, 1, 100, 0)),
  bpm_Label("BPM"),
  bpm_Scale(bpm_adjustment),
  button_Quit(Gtk::Stock::QUIT) {
   
-  set_title("Jack Métronome");
+  set_title("Jack Metronome");
   set_border_width(5);
   set_default_size(400, 200);
 
@@ -17,6 +17,12 @@ MainWindow::MainWindow(const Glib::RefPtr<Gtk::Application>& app):
   m_VBox.pack_start(app_Window);
   m_VBox.set_spacing(18);
   
+  for (auto const& t : tempo) {
+    m_Combo.append(t.second);
+  }
+  m_Combo.set_active(3);
+  m_Combo.signal_changed()
+         .connect(sigc::mem_fun(*this, &MainWindow::on_combo_changed));
   m_VBox.pack_start(m_Combo);
   
   m_VBox.add(bpm_Label);
@@ -38,7 +44,6 @@ MainWindow::MainWindow(const Glib::RefPtr<Gtk::Application>& app):
   
   show_all_children();
 
-// change_BPM_value(50);
 }
 
 MainWindow::~MainWindow() {
@@ -46,12 +51,17 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_BPM_value_changed() {
-  std::cout << bpm_adjustment->get_value() << std::endl;
-  // const double val = m_adjustment_digits->get_value();
+  int bpm_value = bpm_adjustment->get_value();
+  Metronome::change_BPM(bpm_value);
+  int combo_index = get_index(bpm_value);
+  m_Combo.set_active(combo_index);
 }
 
-void MainWindow::change_BPM_value(double val) {
-  bpm_Scale.set_value((int)val);
+void MainWindow::on_combo_changed() {
+  Glib::ustring text = m_Combo.get_active_text();
+  // std::cout << "Combo changed: " << text << std::endl;
+  bpm_Scale.set_value(get_bpm(text));
+  Metronome::change_BPM(bpm_adjustment->get_value());
 }
 
 void MainWindow::on_button_quit() {

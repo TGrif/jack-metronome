@@ -1,12 +1,11 @@
 #include "jackengine.hh"
+#include "alsaengine.hh"
+
 #include "metronome.hh"
+#include "tempo.hh"
 
 
-// typedef jack_default_audio_sample_t sample_t;
-
-
-int Metronome::staticProcess(jack_nframes_t nframes, void *arg)
-{
+int Metronome::staticProcess(jack_nframes_t nframes, void *arg) {
   return static_cast<Metronome*>(arg)->process(nframes);
 }
 
@@ -14,45 +13,41 @@ int Metronome::process(jack_nframes_t nframes) {
   
   float* outputBuffer_left = (float*) jack_port_get_buffer(AUDIO_out_left, nframes);
   float* outputBuffer_right = (float*) jack_port_get_buffer(AUDIO_out_right, nframes);
-
   
-  // std::cout << jack_time_to_frames(client, nframes) << std::endl;
-  // std::cout << (sizeof(sample_t) * nframes) << std::endl;
-    
-    
-    for (int i = 0; i < (int) nframes; i++) {
+  
+  for (int i = 0; i < (int) nframes; i++) {
 
-      if (counter < 3) {
-        if (playbackIndex < sampleVector.size()) {
-          sample = sampleVector.at(playbackIndex);
-        }
+    if (counter < 3) {
+      if (playbackIndex < sampleVector.size()) {
+        sample = sampleVector.at(playbackIndex);
+      }
+    } else {
+      if (playbackIndex < sampleVector2.size()) {
+        sample = sampleVector2.at(playbackIndex);
       } else {
-        if (playbackIndex < sampleVector2.size()) {
-          sample = sampleVector2.at(playbackIndex);
-        } else {
-          sample = 0;
-        }
+        sample = 0;
       }
-
-      outputBuffer_left[i] = sample;
-      outputBuffer_right[i] = sample;
-      
-      ++playbackIndex;
-      ++cur_time;
-      
-      
-      if (cur_time >= next_click) {
-        // std::cout << (counter < 3 ? "tic" : "tac") << std::endl;
-        
-        playbackIndex = 0;
-        next_click += dt;
-        
-        counter++;
-        if (counter == 4) counter = 0;
-        
-      }
-
     }
+
+    outputBuffer_left[i] = sample;
+    outputBuffer_right[i] = sample;
+    
+    ++playbackIndex;
+    ++cur_time;
+    
+    
+    if (cur_time >= next_click) {
+      // std::cout << (counter < 3 ? "tic" : "tac") << std::endl;
+      
+      playbackIndex = 0;
+      next_click += dt;
+      
+      counter++;
+      if (counter == 4) counter = 0;
+      
+    }
+
+  }
     
   return 0;
   
@@ -99,9 +94,14 @@ void Metronome::jack_shutdown (void *arg) {  // FIXME
   exit(1);
 }
 
+// void Metronome::jack_client_free (jack_client_t *client) {
+//   jack_deactivate(client);
+//   jack_client_close(client);
+// }
+
 Metronome::Metronome() {
 
-  // jack_client_free(client);
+  // jack_client_free(client);  // FIXME
   
   client = jack_client_open("Jack Metronome", JackNullOption, 0, 0);
   // std::cout << jack_get_client_name(client) << std::endl;
@@ -129,15 +129,8 @@ Metronome::Metronome() {
   dt = sampleRate * 60. / BPM;
   next_click = dt;
   
-  // jack_time_start = jack_get_time();
-  // std::cout << jack_time_start << std::endl;
   
-  
-  // std::cout << "ui" << std::endl;
   /*
-  while (true) {
-    sleep(1);
-  }
   
   jack_deactivate(client);
   jack_client_close(client);
@@ -145,6 +138,10 @@ Metronome::Metronome() {
   std::cout << "Jack closed." << std::endl;*/
   // return 0;
   
+}
+
+void Metronome::change_BPM (int val) {
+  dt = sampleRate * 60. / val;
 }
 
 Metronome::~Metronome() {

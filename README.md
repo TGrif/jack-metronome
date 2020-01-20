@@ -2,12 +2,14 @@
 
 
 ### require
+jack
+gtkmm 3
 libsndfile-devel
 
 
 
 ### compile
-g++ metronome.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --libs`
+g++ main.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --libs`
 
 
 

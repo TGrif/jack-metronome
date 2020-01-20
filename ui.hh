@@ -12,27 +12,24 @@ class MainWindow: public Gtk::Window, Metronome {
     virtual ~MainWindow();
 
 
-  protected:
+  private:
 
     void on_BPM_value_changed();
-    void change_BPM_value(double val);
+    void on_combo_changed();
     void on_button_quit();
 
 
     Glib::RefPtr<Gtk::Adjustment> bpm_adjustment;
-    Glib::RefPtr<Gtk::ListStore> m_refTreeModel;  // https://developer.gnome.org/gtkmm-tutorial/stable/combobox-example-full.html.en
     
 
     Gtk::ScrolledWindow app_Window;
     
     Gtk::VBox m_VBox;
-    // Gtk::Box m_HBox_Digits;
-    
-    // Gtk::TextView m_TextView;
+
     Gtk::Label bpm_Label;
     Gtk::HScale bpm_Scale;
     
-    Gtk::ComboBox m_Combo;
+    Gtk::ComboBoxText m_Combo;
     
     Gtk::HButtonBox m_ButtonBox;
     Gtk::Button button_Quit;

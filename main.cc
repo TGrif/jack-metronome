@@ -6,8 +6,6 @@
  */
 #include <iostream>
 
-#include <gtkmm.h>
-
 #include "metronome.cc"
 #include "ui.cc"
 
