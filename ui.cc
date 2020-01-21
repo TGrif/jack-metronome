@@ -1,6 +1,7 @@
 #include "ui.hh"
 #include "tempo.hh"
 
+
 MainWindow::MainWindow (const Glib::RefPtr<Gtk::Application>& app):
  bpm_adjustment(Gtk::Adjustment::create(BPM, BPM_min, BPM_max, 1, 100, 0)),
  bpm_Label("BPM"),
@@ -67,4 +68,3 @@ void MainWindow::on_combo_changed() {
 void MainWindow::on_button_quit() {
   hide();
 }
-

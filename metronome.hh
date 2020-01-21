@@ -34,16 +34,16 @@ class Metronome: JackEngine, AlsaEngine {
     
     int loadTickSound();
     
-    vector<float> sampleVector;
-    vector<float> sampleVector2;
+    vector<float> sampleVectorTick;
+    vector<float> sampleVectorTack;
 
     float sample;
 
     int playbackIndex = 0;
 
-    atomic<double> dt;  // tempo ?
     unsigned int cur_time = 0;
-    double next_click;
+    atomic<double> nb_frames;
+    double next_click = nb_frames;
     int counter = 0;
     
 };

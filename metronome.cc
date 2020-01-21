@@ -18,15 +18,13 @@ int Metronome::process(jack_nframes_t nframes) {
   for (int i = 0; i < (int) nframes; i++) {
 
     if (counter < 3) {
-      if (playbackIndex < sampleVector.size()) {
-        sample = sampleVector.at(playbackIndex);
+      if (playbackIndex < sampleVectorTick.size()) {
+        sample = sampleVectorTick.at(playbackIndex);
       }
     } else {
-      if (playbackIndex < sampleVector2.size()) {
-        sample = sampleVector2.at(playbackIndex);
-      } else {
-        sample = 0;
-      }
+      sample = playbackIndex < sampleVectorTack.size()
+        ? sampleVectorTack.at(playbackIndex)
+        : 0;
     }
 
     outputBuffer_left[i] = sample;
@@ -37,13 +35,14 @@ int Metronome::process(jack_nframes_t nframes) {
     
     
     if (cur_time >= next_click) {
-      // std::cout << (counter < 3 ? "tic" : "tac") << std::endl;
       
       playbackIndex = 0;
-      next_click += dt;
+      next_click += nb_frames;
       
       counter++;
-      if (counter == 4) counter = 0;
+      if (counter == 4) {
+        counter = 0;
+      }
       
     }
 
@@ -57,37 +56,29 @@ int Metronome::loadTickSound() {
   SndfileHandle fileHandleTick("assets/metro_1.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
   SndfileHandle fileHandleTack("assets/metro_2.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
   
-  // get the number of frames in the sample
-  int sizeTick = fileHandleTick.frames();
-  int sizeTack = fileHandleTack.frames();
-
-  // std::cout << sizeTick << std::endl;  // 23886
-  // std::cout << sizeTack << std::endl;  // 5389
+  int sizeTick = fileHandleTick.frames();  // 23886
+  int sizeTack = fileHandleTack.frames();  // 5389
   
   if (sizeTick == 0 || sizeTack == 0) {
-    std::cout << "Problem when loading metronome sound." << std::endl;
-    return -1;
+    return 1;
   }
   
-  // int channels   = fileHandleTick.channels();
-  // int samplerateTick = fileHandleTick.samplerate();
-  // int samplerateTack = fileHandleTack.samplerate();
+  // int channels = fileHandleTick.channels();  // 1
+  // int samplerateTick = fileHandleTick.samplerate();  // 48000
   
-  // std::cout << channels << std::endl;
-  // std::cout << samplerateTick << std::endl;
-  // std::cout << samplerateTack << std::endl;
+  sampleVectorTick.resize(sizeTick);
+  sampleVectorTack.resize(sizeTack);
   
-  sampleVector.resize(sizeTick);
-  sampleVector2.resize(sizeTack);
-  
-  fileHandleTick.read(&sampleVector.at(0), sizeTick);
-  fileHandleTack.read(&sampleVector2.at(0), sizeTack);
+  fileHandleTick.read(&sampleVectorTick.at(0), sizeTick);
+  fileHandleTack.read(&sampleVectorTack.at(0), sizeTack);
   
   return 0;
 }
 
 
 void Metronome::jack_shutdown (void *arg) {  // FIXME
+  // jack_port_unregister(jack_client, out_l);
+  // jack_port_unregister(jack_client, out_r);
   // jack_deactivate(client);
   // jack_client_close(client);
   std::cout << "Jack jack_shutdown." << std::endl;
@@ -120,14 +111,17 @@ Metronome::Metronome() {
   
   
   if (loadTickSound()) {
-    std::cout << "Problem when loading metronome sound." << std::endl;
+    throw std::runtime_error("Problem when loading metronome sound.");
+    // std::cout << "Problem when loading metronome sound." << std::endl;
     // return 0;
-    return;
+    // return;
+    exit(1);
   }
   
   
-  dt = sampleRate * 60. / BPM;
-  next_click = dt;
+  change_BPM(BPM);
+  // dt = sampleRate * 60. / BPM;
+  // next_click = dt;
   
   
   /*
@@ -141,7 +135,8 @@ Metronome::Metronome() {
 }
 
 void Metronome::change_BPM (int val) {
-  dt = sampleRate * 60. / val;
+  nb_frames = sampleRate * 60. / val;
+  // std::cout << dt << std::endl;
 }
 
 Metronome::~Metronome() {

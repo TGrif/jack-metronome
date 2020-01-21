@@ -2,10 +2,9 @@
 
 
 ### require
-jack
-gtkmm 3
-libsndfile-devel
-
+jack  
+gtkmm  
+sndfile 
 
 
 ### compile
@@ -13,10 +12,13 @@ g++ main.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --lib
 
 
 
-### metronome sound from
+### metronome sound from:
+
 https://www.rncbc.org/drupal/node/566
 
 
-### inspired by
-https://github.com/harryhaaren/openAudioProgrammingTutorials/tree/master/loopedSample
+
+### inspired by:
+
+https://github.com/harryhaaren/openAudioProgrammingTutorials/tree/master/loopedSample  
 https://github.com/jmage619/jmetro

@@ -4,16 +4,15 @@
 #include <jack/jack.h>
 #include <jack/midiport.h>
 
+// typedef jack_default_audio_sample_t sample_t;
+
 
 class JackEngine {
     
   protected:
-  
-    // static int staticProcess(jack_nframes_t nframes, void *arg);
-    // int process(jack_nframes_t nframes);
     
     jack_client_t* client;
-
+    
     jack_port_t* AUDIO_out_left;
     jack_port_t* AUDIO_out_right;
   

@@ -4,14 +4,18 @@
 #include <map>
 #include <string>
 
+using std::pair;
+using std::map;
+using std::string;
 
-typedef std::pair<int, int> tempo_min_max;
+typedef pair<int, int> tempo_min_max;
+
 
 const int BPM_min = 40;
 const int BPM_max = 208;
 
 
-static std::map<tempo_min_max, std::string> tempo = {
+static map<tempo_min_max, string> tempo = {
   { { 40, 60 }, "Largo" },
   { { 60, 66 }, "Larghetto" },
   { { 66, 76 }, "Adagio" },
@@ -23,7 +27,7 @@ static std::map<tempo_min_max, std::string> tempo = {
 };
 
 
-static std::string get_tempo (int bpm) {
+static string get_tempo (int bpm) {
   for (auto const& t : tempo) {
     if (bpm < t.first.second) {
       return t.second;
