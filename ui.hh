@@ -17,17 +17,16 @@ class MainWindow: public Gtk::Window, Metronome {
     void on_BPM_value_changed();
     void on_combo_changed();
     void on_button_quit();
-
-
-    Glib::RefPtr<Gtk::Adjustment> bpm_adjustment;
     
-
+    
     Gtk::ScrolledWindow app_Window;
     
     Gtk::VBox m_VBox;
 
     Gtk::Label bpm_Label;
     Gtk::HScale bpm_Scale;
+    
+    Glib::RefPtr<Gtk::Adjustment> bpm_adjustment;
     
     Gtk::ComboBoxText m_Combo;
     

@@ -1,5 +1,5 @@
 #include "jackengine.hh"
-#include "alsaengine.hh"
+// #include "alsaengine.hh"
 
 #include "metronome.hh"
 #include "tempo.hh"
@@ -112,9 +112,6 @@ Metronome::Metronome() {
   
   if (loadTickSound()) {
     throw std::runtime_error("Problem when loading metronome sound.");
-    // std::cout << "Problem when loading metronome sound." << std::endl;
-    // return 0;
-    // return;
     exit(1);
   }
   

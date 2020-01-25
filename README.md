@@ -8,7 +8,7 @@ sndfile
 
 
 ### compile
-g++ main.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --libs`
+make
 
 
 
@@ -16,6 +16,9 @@ g++ main.cc -o build/metronome `pkg-config jack sndfile gtkmm-3.0 --cflags --lib
 
 https://www.rncbc.org/drupal/node/566
 
+
+### icon from:
+https://www.pngrepo.com/svg/54034/metronome
 
 
 ### inspired by:

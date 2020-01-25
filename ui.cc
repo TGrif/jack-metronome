@@ -9,6 +9,7 @@ MainWindow::MainWindow (const Glib::RefPtr<Gtk::Application>& app):
  button_Quit(Gtk::Stock::QUIT) {
   
   set_title("Jack Metronome");
+  set_icon_from_file("assets/metronome.png");
   set_border_width(5);
   set_default_size(400, 200);
 
@@ -60,7 +61,6 @@ void MainWindow::on_BPM_value_changed() {
 
 void MainWindow::on_combo_changed() {
   Glib::ustring text = m_Combo.get_active_text();
-  // std::cout << "Combo changed: " << text << std::endl;
   bpm_Scale.set_value(get_bpm(text));
   Metronome::change_BPM(bpm_adjustment->get_value());
 }
