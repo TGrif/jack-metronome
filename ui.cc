@@ -8,12 +8,37 @@ MainWindow::MainWindow (const Glib::RefPtr<Gtk::Application>& app):
  bpm_Scale(bpm_adjustment),
  button_Quit(Gtk::Stock::QUIT) {
   
-  set_title("Jack Metronome");
-  set_icon_from_file("assets/metronome.png");
-  set_border_width(5);
-  set_default_size(400, 200);
+  // set_border_width(0);
+  // set_default_size(400, 200);
 
   add(m_VBox);
+  
+  m_VBox.add(m_EventBox);
+  m_EventBox.set_size_request(500, 500);
+  m_EventBox.override_background_color(*light_pink_bg);
+  
+  // GtkWidget *drawing_area;
+  // drawing_area->set_size_request(400, 400);
+
+  // g_signal_connect(m_EventBox, "button-press-event", G_CALLBACK(clicked), NULL);
+  // m_EventBox.add_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
+  m_EventBox.signal_button_release_event()
+            .connect(sigc::mem_fun(*this, &MainWindow::on_eventbox_clicked));
+  
+  // area.set_size_request(400, 400);
+  // area.set_line_width(10.0);
+  // m_image = Gdk::Pixbuf::create_from_resource("assets/led_red.png");
+  
+  // m_EventBox.add(*drawing_area);
+  
+  
+  // m_Led = gtk_image_new_from_icon_name ("gtk-yes", 128, 0);
+  
+  // new_from_icon_name  'gtk-yes'  'gtk-no'
+  // Gtk.Image.new_from_icon_name("document-open", Gtk.IconSize.LARGE_TOOLBAR)   //TODO utiliser les icones et supprimer les images led
+  
+
+  // m_VBox.add(m_Led);
 
   app_Window.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
   m_VBox.pack_start(app_Window);
@@ -50,6 +75,49 @@ MainWindow::MainWindow (const Glib::RefPtr<Gtk::Application>& app):
 
 MainWindow::~MainWindow() {
   std::cout << "Bye." << std::endl;
+}
+
+bool MainWindow::on_draw (const Cairo::RefPtr<Cairo::Context>& cr) {
+  try {
+    background_image = Gdk::Pixbuf::create_from_file("assets/metronome.png");
+  } catch (const Gio::ResourceError& ex) {
+    std::cerr << "ResourceError: " << ex.what() << std::endl;
+  } catch (const Gdk::PixbufError& ex) {
+    std::cerr << "PixbufError: " << ex.what() << std::endl;
+  }
+  
+  Gdk::Cairo::set_source_pixbuf(cr, background_image, 100, 80);
+  cr->rectangle(110, 90, background_image->get_width(), background_image->get_height());
+  cr->fill();
+  
+  draw_aiguille(cr);
+  
+  return true;
+}
+
+void MainWindow::draw_aiguille (const Cairo::RefPtr<Cairo::Context>& cr) {
+  
+  Gtk::Allocation allocation = get_allocation();
+  const int width = allocation.get_width();
+  const int height = allocation.get_height();
+  
+  int xc, yc;
+  xc = width / 2;
+  yc = height / 2;
+
+  cr->set_line_width(3.0);
+  cr->set_source_rgb(0.0, 0.0, 0.0);
+
+  cr->move_to(xc, yc);
+  cr->line_to(xc-150, 150);
+
+  cr->stroke();
+}
+
+bool MainWindow::on_eventbox_clicked (GdkEventButton* ev) {
+  std::cout << "Clicked! \n" << std::endl;
+  std::cout << ev->x << " " << ev->y << std::endl;
+  return true;
 }
 
 void MainWindow::on_BPM_value_changed() {
