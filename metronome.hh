@@ -10,7 +10,7 @@ using std::vector;
 using std::atomic;
 
 
-class Metronome: JackEngine/*, AlsaEngine*/ {
+class Metronome: JackEngine, AlsaEngine {
   
   public:
     
