@@ -16,7 +16,10 @@
    version="1.1"
    id="svg8"
    sodipodi:docname="metronome.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:export-filename="/home/TGrif/C++/metronome/assets/metronome.png"
+   inkscape:export-xdpi="84.785042"
+   inkscape:export-ydpi="84.785042">
   <defs
      id="defs2">
     <filter
@@ -92,9 +95,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="341.7747"
-     inkscape:cy="674.28571"
+     inkscape:zoom="0.81012897"
+     inkscape:cx="396.85039"
+     inkscape:cy="547.39572"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -171,14 +174,14 @@
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="118.68452"
-       y="240.68155"
+       x="120.48078"
+       y="239.21188"
        id="text1218"><tspan
          sodipodi:role="line"
          id="tspan1216"
-         x="118.68452"
-         y="240.68155"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.3499999px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;stroke-width:0.26458332">JackMétro</tspan></text>
+         x="120.48078"
+         y="239.21188"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#e6e6e6;stroke-width:0.26458332">JackMetronome</tspan></text>
   </g>
   <g
      inkscape:label="Calque 1"
@@ -287,8 +290,8 @@
        id="path1007"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.18209872px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 96.041575,143.4302 -1.77214,10.05031"
+       style="fill:none;stroke:#000000;stroke-width:0.21828659px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 96.953251,143.81652 94.3027,153.47217"
        id="path1007-4"
        inkscape:connector-curvature="0" />
     <text
@@ -311,9 +314,8 @@
        id="text1078"
        transform="matrix(0.81387476,0,0,0.81387476,20.192331,21.409659)"><textPath
          xlink:href="#path839"
-         id="textPath1104"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;stroke-width:0.26458332"
-   id="tspan1076">LARGO  | L'gh | ADAGIO | ANDANTE | MOD. | ALLEGRO | PRESTO |  Pti</tspan></textPath></text>
+         id="textPath1104"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.46763706px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;stroke-width:0.26458332">LARGO        | L'gh | ADAGIO |   ANDANTE   |   MOD.   |     ALLEGRO        | PRESTO |  Pti</textPath></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.17499995px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -705,8 +707,8 @@
          x="123.57492"
          y="154.3358">200</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.19226268px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 92.945507,142.56575 -3.5175,9.70033"
+       style="fill:none;stroke:#000000;stroke-width:0.20498677px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 93.690358,143.1376 -4.25125,9.12359"
        id="path1007-4-1"
        inkscape:connector-curvature="0" />
     <path
@@ -715,8 +717,8 @@
        id="path1007-4-7"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.17019527px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 86.863512,139.30802 -5.338629,7.9003"
+       style="fill:none;stroke:#000000;stroke-width:0.17178603px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 87.240065,139.68703 -5.713759,7.52025"
        id="path1007-4-0"
        inkscape:connector-curvature="0" />
     <path
@@ -755,43 +757,43 @@
        id="path1007-4-08-3-0-7-2"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.1516597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 75.164563,111.30049 -8.96603,0.60439"
+       style="fill:none;stroke:#000000;stroke-width:0.24930361px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 75.213754,112.38349 -9.064411,-0.71944"
        id="path1007-4-08-3-0-7-2-8"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.1516597px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 76.29692,106.63567 -8.962888,-0.64933"
+       style="fill:none;stroke:#000000;stroke-width:0.23171046px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 75.795432,107.68642 -8.449803,-1.60775"
        id="path1007-4-08-3-0-7-2-8-5"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.25377455px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 76.846628,103.12772 -8.36141,-1.94889"
+       d="m 76.896604,104.01584 -8.134768,-2.74535"
        id="path1007-4-08-3-0-7-2-8-5-0"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.32250094px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 78.814738,99.764372 -8.32888,-3.159699"
+       d="M 78.725054,99.983088 70.575542,96.385953"
        id="path1007-4-08-3-0-7-2-8-5-0-9"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.34853035px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 80.789774,95.869724 72.857547,91.994861"
+       d="M 80.378068,96.549521 73.269253,91.315064"
        id="path1007-4-08-3-0-7-2-8-5-0-9-6"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.34359396px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 83.429776,92.553926 -6.21967,-4.802794"
+       style="fill:none;stroke:#000000;stroke-width:0.34466198px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 83.265724,92.716297 77.210861,87.752058"
        id="path1007-4-08-3-0-7-2-8-5-0-9-6-3"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.16376957px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 87.825251,90.131926 81.130107,83.936518"
+       style="fill:none;stroke:#000000;stroke-width:0.14960986px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 87.013499,89.810447 81.125373,83.931403"
        id="path1007-4-8"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.16376959px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 91.708282,87.921841 85.940528,80.854943"
+       style="fill:none;stroke:#000000;stroke-width:0.14607221px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 90.735718,87.601194 85.933309,80.848996"
        id="path1007-4-8-5"
        inkscape:connector-curvature="0" />
     <path
@@ -881,12 +883,14 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.14122228px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 123.90945,140.62172 5.80311,5.08393"
+       d="m 124.70785,140.00423 4.85949,5.99231"
        id="path1007-4-8-5-6-1-5-9-8-4-8-0-4-2-3-8-5-0-9"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:transform-center-x="1.6329705"
+       inkscape:transform-center-y="0.48989114" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.14122228px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 119.37778,142.69949 5.03909,5.84209"
+       style="fill:none;stroke:#000000;stroke-width:0.14666231px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 120.19543,142.5373 4.54686,6.98297"
        id="path1007-4-8-5-6-1-5-9-8-4-8-0-4-2-3-8-5-0-9-6"
        inkscape:connector-curvature="0" />
     <path
@@ -894,5 +898,17 @@
        d="m 115.36684,144.00804 3.23359,7.00475"
        id="path1007-4-8-5-6-1-5-9-8-4-8-0-4-2-3-8-5-0-9-6-3"
        inkscape:connector-curvature="0" />
+    <path
+       style="fill:#333333;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path965"
+       sodipodi:type="arc"
+       sodipodi:cx="105.26637"
+       sodipodi:cy="115.38244"
+       sodipodi:rx="9.260417"
+       sodipodi:ry="9.260417"
+       sodipodi:start="2.2919315"
+       sodipodi:end="2.2903781"
+       sodipodi:open="true"
+       d="m 99.152296,122.33754 a 9.260417,9.260417 0 0 1 -0.843396,-13.06648 9.260417,9.260417 0 0 1 13.06615,-0.84847 9.260417,9.260417 0 0 1 0.85354,13.06582 9.260417,9.260417 0 0 1 -13.065482,0.85862" />
   </g>
 </svg>

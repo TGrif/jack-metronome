@@ -23,14 +23,14 @@ class Metronome: JackEngine/*, AlsaEngine*/ {
     void change_BPM(int val);
     
     int BPM = 80;
+    int volume;   // TODO
     
     
   private:
     
     static int staticProcess(jack_nframes_t nframes, void *arg);
     int process(jack_nframes_t nframes);
-    static void jack_shutdown (void *arg);
-    // static void jack_client_free (jack_client_t *client);
+    static void jack_shutdown(void *arg);
     
     int loadTickSound();
     

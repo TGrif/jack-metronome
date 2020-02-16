@@ -17,7 +17,7 @@ class MainWindow: public Gtk::Window, Metronome {
     Gdk::RGBA *light_pink_bg = new Gdk::RGBA("#CEB7B3");
 
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
-    void draw_aiguille(const Cairo::RefPtr<Cairo::Context>& cr);
+    void draw_needle(const Cairo::RefPtr<Cairo::Context>& cr, int x, int y);
 
     void on_BPM_value_changed();
     void on_combo_changed();
@@ -25,14 +25,16 @@ class MainWindow: public Gtk::Window, Metronome {
     // bool on_eventbox_button_press(GdkEventButton* button_event);
     bool on_eventbox_clicked(GdkEventButton* e);
     
+    Cairo::RefPtr<Cairo::Context> cairo_context;
+    
     Glib::RefPtr<Gdk::Pixbuf> background_image;
+    /*Gtk::Image */Glib::RefPtr<Gdk::Pixbuf> m_Led;
     
     
     Gtk::ScrolledWindow app_Window;
     
     Gtk::VBox m_VBox;
     Gtk::EventBox m_EventBox;
-    // Gtk::Image m_Led;
     // Gtk::DrawingArea area;
     
     Gtk::Label bpm_Label;

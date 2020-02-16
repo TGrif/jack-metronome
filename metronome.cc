@@ -53,8 +53,8 @@ int Metronome::process(jack_nframes_t nframes) {
 }
 
 int Metronome::loadTickSound() {
-  SndfileHandle fileHandleTick("assets/metro_1.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
-  SndfileHandle fileHandleTack("assets/metro_2.wav", SFM_READ,  SF_FORMAT_WAV | SF_FORMAT_FLOAT, 1, 44100);
+  SndfileHandle fileHandleTick("assets/tick.wav", SFM_READ, SF_FORMAT_WAV, 1, 44100);  // sampleRate ?
+  SndfileHandle fileHandleTack("assets/tack.wav", SFM_READ, SF_FORMAT_WAV, 1, 44100);
   
   int sizeTick = fileHandleTick.frames();  // 23886
   int sizeTack = fileHandleTack.frames();  // 5389
@@ -62,9 +62,6 @@ int Metronome::loadTickSound() {
   if (sizeTick == 0 || sizeTack == 0) {
     return 1;
   }
-  
-  // int channels = fileHandleTick.channels();  // 1
-  // int samplerateTick = fileHandleTick.samplerate();  // 48000
   
   sampleVectorTick.resize(sizeTick);
   sampleVectorTack.resize(sizeTack);
@@ -75,67 +72,51 @@ int Metronome::loadTickSound() {
   return 0;
 }
 
-
-void Metronome::jack_shutdown (void *arg) {  // FIXME
-  // jack_port_unregister(jack_client, out_l);
-  // jack_port_unregister(jack_client, out_r);
-  // jack_deactivate(client);
-  // jack_client_close(client);
-  std::cout << "Jack jack_shutdown." << std::endl;
+void Metronome::jack_shutdown(void *arg) {
+  std::cout << "Jack shutdown." << std::endl;
   exit(1);
 }
 
-// void Metronome::jack_client_free (jack_client_t *client) {
-//   jack_deactivate(client);
-//   jack_client_close(client);
-// }
+void Metronome::change_BPM(int val) {
+  nb_frames = sampleRate * 60. / val;
+}
+
 
 Metronome::Metronome() {
-
-  // jack_client_free(client);  // FIXME
-  
+  // std::cout << client << std::endl;
   client = jack_client_open("Jack Metronome", JackNullOption, 0, 0);
-  // std::cout << jack_get_client_name(client) << std::endl;
+  if (client == nullptr) {
+    throw std::runtime_error("Can't open Jack client.");
+  }
   
   jack_set_process_callback(client, staticProcess, static_cast<void*>(this));
-  // jack_set_process_callback(client, process_callback, 0);
-  jack_activate(client);
+  
+  if (jack_activate(client)) {
+    throw std::runtime_error("Can't activate Jack client.");
+  }
   
   jack_on_shutdown(client, jack_shutdown, 0);
   
   sampleRate = jack_get_sample_rate(client);
-  // std::cout << sampleRate << std::endl;
+  
   
   AUDIO_out_left = jack_port_register(client, "output_L", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
   AUDIO_out_right = jack_port_register(client, "output_R", JACK_DEFAULT_AUDIO_TYPE, JackPortIsOutput, 0);
-  
+  if (AUDIO_out_left == nullptr || AUDIO_out_right == nullptr) {
+    throw std::runtime_error("Can't register output ports.");
+  }
   
   if (loadTickSound()) {
     throw std::runtime_error("Problem when loading metronome sound.");
-    exit(1);
   }
   
-  
   change_BPM(BPM);
-  // dt = sampleRate * 60. / BPM;
-  // next_click = dt;
   
-  
-  /*
-  
-  jack_deactivate(client);
-  jack_client_close(client);
-  
-  std::cout << "Jack closed." << std::endl;*/
-  // return 0;
-  
-}
-
-void Metronome::change_BPM (int val) {
-  nb_frames = sampleRate * 60. / val;
-  // std::cout << dt << std::endl;
 }
 
 Metronome::~Metronome() {
-  // noop
+  jack_port_unregister(client, AUDIO_out_left);
+  jack_port_unregister(client, AUDIO_out_right);
+  jack_deactivate(client);
+  jack_client_close(client);
 }
